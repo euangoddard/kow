@@ -1,5 +1,12 @@
-<ul>
+<ol>
   <li *ngFor="let link of links">
-    <a [href]="link" target="_blank">{{ link }}</a>
+    <a [href]="link.link" target="_blank">{{ link.link }}</a>
+    <button
+      type="button"
+      [cdkCopyToClipboard]="link.link"
+      (cdkCopyToClipboardCopied)="link.isCopied = true"
+    >
+      {{ link.isCopied ? 'Copied' : 'Copy' }}
+    </button>
   </li>
-</ul>
+</ol>

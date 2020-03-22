@@ -1,3 +1,4 @@
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +18,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ClipboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

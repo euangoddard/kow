@@ -10,7 +10,7 @@ import { LinkConfig } from 'src/app/controls/models';
 export class LinksComponent implements OnChanges {
   @Input() config: LinkConfig;
 
-  links: string[] = [];
+  links: Link[] = [];
 
   constructor(private readonly cardsService: CardsService) {}
 
@@ -26,7 +26,12 @@ export class LinksComponent implements OnChanges {
     const hands = this.cardsService.buildHands(players, cards);
     this.links = hands.map(hand => {
       const handId = this.cardsService.encodeHand(hand);
-      return `${location.origin}/hand/${handId}`;
+      return { link: `${location.origin}/hand/${handId}`, isCopied: false };
     });
   }
+}
+
+interface Link {
+  link: string;
+  isCopied: boolean;
 }
