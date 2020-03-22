@@ -2,9 +2,15 @@
   <img
     class="card"
     alt="{{ card.card.rank }} of {{ card.card.suit }}"
-    [src]="card.isFlipped ? '/assets/cards/back.svg' : '/assets/cards/' + card.card.id + '.svg'"
+    [src]="'/assets/cards/' + card.card.id + '.svg'"
     *ngFor="let card of hand$ | async"
     (click)="card.isFlipped = !card.isFlipped"
-    style="width: 200px;"
+    [class.faded]="card.isFlipped"
   />
+</div>
+
+<div class="fab-container">
+  <a routerLink="/ " mat-fab aria-label="Start a new game" color="accent">
+    <mat-icon>autorenew</mat-icon>
+  </a>
 </div>

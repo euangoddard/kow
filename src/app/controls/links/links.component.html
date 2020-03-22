@@ -1,12 +1,19 @@
-<ol>
-  <li *ngFor="let link of links">
-    <a [href]="link.link" target="_blank">{{ link.link }}</a>
-    <button
-      type="button"
-      [cdkCopyToClipboard]="link.link"
-      (cdkCopyToClipboardCopied)="link.isCopied = true"
-    >
-      {{ link.isCopied ? 'Copied' : 'Copy' }}
-    </button>
-  </li>
-</ol>
+<h2>Links</h2>
+<div *ngFor="let link of links; index as index" class="hand">
+  <h4>Player {{ index + 1 }}</h4>
+  <a [href]="link.link" target="_blank">{{ link.label }}</a>
+  <button
+    type="button"
+    mat-stroked-button
+    color="accent"
+    [cdkCopyToClipboard]="link.link"
+    (cdkCopyToClipboardCopied)="link.isCopied = true"
+  >
+    <ng-container *ngIf="link.isCopied; else copy">
+      Copied <mat-icon>check</mat-icon>
+    </ng-container>
+    <ng-template #copy>
+      Copy <mat-icon>link</mat-icon>
+    </ng-template>
+  </button>
+</div>

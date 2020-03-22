@@ -1,23 +1,73 @@
-$font-stack: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif,
-  Apple Color Emoji, Segoe UI Emoji;
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$kow-primary: mat-palette($mat-green);
+$kow-accent: mat-palette($mat-purple, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$kow-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$kow-theme: mat-light-theme($kow-primary, $kow-accent, $kow-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($kow-theme);
+
+html,
+body {
+  height: 100%;
+}
 
 * {
   box-sizing: border-box;
 }
 
+
 body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
   background-color: #2e7d32;
-  font-family: $font-stack;
   font-size: 16px;
   line-height: 1;
-  margin: 0;
   padding: 1rem;
   color: white;
 }
 
-h1 {
+%heading {
   font-weight: 300;
   margin: 0 0 1rem;
+}
+
+h1 {
+  @extend %heading;
+  font-size: 3rem;
+}
+
+h2 {
+  @extend %heading;
+}
+
+h4 {
+  @extend %heading;
+  margin: 0 0 0.25rem;
+}
+
+@mixin small-screen {
+  @media (max-width: 700px) {
+    @content;
+  }
 }
 
 kow-controls {
@@ -27,25 +77,64 @@ kow-controls {
   border-radius: 0.25rem;
   color: rgba(black, 0.65);
   min-height: 75vh;
-  font-size: 1.5rem;
 
   form {
     display: flex;
     font-size: 1.5rem;
+    align-items: center;
 
-    div {
-      display: flex;
-      align-items: center;
-      margin-right: 2rem;
+    @include small-screen {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    mat-form-field {
+      margin-inline-end: 2rem;
+    }
+
+  }
+}
+
+kow-links {
+  display: block;
+  border-top: 1px solid rgba(black, 0.45);
+  padding: 1rem 0 0;
+  margin-top: 1rem;
+
+  .hand {
+    margin-bottom: 1.5rem;
+  }
+
+  a {
+    display: inline-block;
+    margin-right: 1rem;
+  }
+}
+
+kow-hand {
+
+  text-align: center;
+  padding-bottom: 4rem;
+
+  .card {
+    width: 200px;
+    margin-right: 0.5rem;
+
+    @include small-screen {
+      width: 150px;
     }
   }
 
-  select {
-    font-size: inherit;
-    margin-left: 0.5rem;
+  .faded {
+    opacity: 0.3;
   }
 
-  button {
-    font-size: inherit;
+  .fab-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
   }
 }
+
+

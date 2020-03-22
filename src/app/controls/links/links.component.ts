@@ -26,12 +26,13 @@ export class LinksComponent implements OnChanges {
     const hands = this.cardsService.buildHands(players, cards);
     this.links = hands.map(hand => {
       const handId = this.cardsService.encodeHand(hand);
-      return { link: `${location.origin}/hand/${handId}`, isCopied: false };
+      return { link: `${location.origin}/hand/${handId}`, label: handId, isCopied: false };
     });
   }
 }
 
 interface Link {
   link: string;
+  label: string;
   isCopied: boolean;
 }
