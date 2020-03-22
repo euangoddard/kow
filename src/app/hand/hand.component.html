@@ -1,0 +1,8 @@
+<div class="hand">
+  <img
+    class="card"
+    alt="{{ card.rank }} of {{ card.suit }}"
+    [src]="'/assets/cards/' + card.id + '.svg'"
+    *ngFor="let card of hand$ | async"
+  />
+</div>

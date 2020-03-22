@@ -1,0 +1,17 @@
+<form [formGroup]="formGroup" (ngSubmit)="generateLinks()">
+  <div>
+    <label>Players:</label>
+    <select formControlName="players">
+      <option [value]="o.value" *ngFor="let o of playerOptions">{{ o.label }}</option>
+    </select>
+  </div>
+  <div>
+    <label>Cards:</label>
+    <select formControlName="cards">
+      <option [value]="o.value" *ngFor="let o of cardOptions">{{ o.label }}</option>
+    </select>
+  </div>
+  <button type="submit">Go!</button>
+</form>
+
+<kow-links [config]="config" *ngIf="config"></kow-links>
